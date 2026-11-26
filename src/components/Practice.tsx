@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import type { Lesson, Problem } from '../lib/types'
+import { MASTERY_CORRECT, markCompleted } from '../lib/progress'
+import { useCompleted } from '../lib/useCompleted'
 
 export function Practice({ lesson }: { lesson: Lesson }) {
   const [problem, setProblem] = useState<Problem>(() => lesson.generate())
   const [guess, setGuess] = useState('')
   const [result, setResult] = useState<'right' | 'wrong' | null>(null)
   const [score, setScore] = useState({ right: 0, total: 0 })
+  const done = useCompleted().includes(lesson.slug)
 
   const check = (e: React.FormEvent) => {
     e.preventDefault()
@@ -13,6 +16,7 @@ export function Practice({ lesson }: { lesson: Lesson }) {
     const ok = Number(guess) === problem.answer
     setResult(ok ? 'right' : 'wrong')
     setScore((s) => ({ right: s.right + (ok ? 1 : 0), total: s.total + 1 }))
+    if (ok && score.right + 1 >= MASTERY_CORRECT) markCompleted(lesson.slug)
   }
 
   const next = () => {
@@ -41,6 +45,9 @@ export function Practice({ lesson }: { lesson: Lesson }) {
         {result === 'wrong' && `Not quite. The answer is ${problem.answer}.`}
       </p>
       <p className="score">Score: {score.right} / {score.total}</p>
+      <p className={done ? 'complete' : 'score'}>
+        {done ? '✓ Lesson complete' : `Get ${MASTERY_CORRECT} right to complete this lesson.`}
+      </p>
     </section>
   )
 }

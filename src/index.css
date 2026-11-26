@@ -53,3 +53,8 @@ button { font: inherit; padding: 8px 20px; border-radius: 8px; border: 0; backgr
 [role=status].right { color: var(--good); } [role=status].wrong { color: var(--bad); }
 .score { opacity: .7; font-size: .9rem; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+.meta { display: flex; gap: 8px; align-items: center; }
+.check, .complete { color: var(--good); font-weight: 600; font-size: .9rem; }
+.progress { display: flex; align-items: center; gap: 12px; margin: 16px 0; font-size: .95rem; }
+.progress progress { flex: 1; height: 10px; accent-color: var(--good); }
+button.link { background: none; border: 0; color: var(--fg); opacity: .6; text-decoration: underline; padding: 0; font-size: .85rem; }
