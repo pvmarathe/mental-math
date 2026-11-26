@@ -1,26 +1,17 @@
-import { useEffect, useState } from 'react'
 import { randInt } from '../lib/random'
-import type { Lesson } from '../lib/types'
+import type { AnimationProps, Lesson } from '../lib/types'
+import { Chip, Op, Row } from '../components/visual'
 
-/** Shows 98 + 47 as: borrow 2 from 47 to make 100, then add the rest. */
-function Animation() {
-  const [step, setStep] = useState(0)
-  useEffect(() => {
-    const id = setInterval(() => setStep((s) => (s + 1) % 4), 1800)
-    return () => clearInterval(id)
-  }, [])
-
-  const left = step >= 1 ? 100 : 98
-  const right = step >= 1 ? 45 : 47
+function Animation({ step }: AnimationProps) {
+  const moved = step >= 1
   return (
-    <div className="stage" role="img" aria-label="98 plus 47 becomes 100 plus 45">
-      <span className="num" style={{ color: step >= 1 ? 'var(--accent)' : undefined }}>{left}</span>
-      <span className="op">+</span>
-      <span className="num">{right}</span>
-      <span className="op">=</span>
-      <span className="num">{step >= 2 ? 145 : '?'}</span>
-      {step === 1 && <span className="note">2 moves across</span>}
-    </div>
+    <Row>
+      <Chip tone="hot" tag={moved ? 'got +2' : '2 short of 100'}>{moved ? 100 : 98}</Chip>
+      <Op>+</Op>
+      <Chip tone={moved ? 'hot' : 'normal'} tag={moved ? 'gave −2' : undefined}>{moved ? 45 : 47}</Chip>
+      <Op>=</Op>
+      <Chip tone={step >= 3 ? 'good' : 'dim'}>{step >= 3 ? 145 : '?'}</Chip>
+    </Row>
   )
 }
 
@@ -33,8 +24,9 @@ export const lesson: Lesson = {
   Animation,
   steps: [
     '98 is just 2 short of 100.',
-    'Take 2 from the other number: 47 becomes 45.',
-    'Now add 100 + 45 = 145. Easy!',
+    'Take 2 from 47 and give it to 98.',
+    'Now the sum is 100 + 45, which is easy.',
+    '100 + 45 = 145.',
   ],
   generate: (rand = Math.random) => {
     const a = randInt(95, 99, rand)
