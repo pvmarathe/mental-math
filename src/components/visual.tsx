@@ -20,7 +20,7 @@ export function Chip({ children, tone = 'normal', tag }: { children: ReactNode; 
   )
 }
 
-interface EquationProps {
+export interface EquationProps {
   a: ReactNode
   op?: string
   b?: ReactNode
@@ -131,4 +131,9 @@ export function AreaModel({ cols, rows, cells, reveal }: {
       ))}
     </div>
   )
+}
+
+/** Shows one equation per step. Steps past the last frame keep showing the last one. */
+export function EquationSteps({ frames, step }: { frames: EquationProps[]; step: number }) {
+  return <Equation {...frames[Math.min(step, frames.length - 1)]} />
 }
