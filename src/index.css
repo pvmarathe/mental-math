@@ -15,10 +15,37 @@ a.card { display: flex; flex-direction: column; gap: 4px; }
 a.card:hover { border-color: var(--accent); }
 .lesson-list { list-style: none; padding: 0; }
 .badge { align-self: flex-start; font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; padding: 2px 8px; border-radius: 99px; border: 1px solid var(--line); }
-.stage { display: flex; align-items: center; justify-content: center; gap: 14px; font-size: 2.4rem; font-weight: 700; min-height: 120px; position: relative; }
-.num { transition: color .6s; min-width: 3ch; text-align: center; }
-.op { opacity: .5; }
-.note { position: absolute; bottom: 0; font-size: 1rem; font-weight: 400; color: var(--accent); }
+.stage { min-height: 250px; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+.row { display: flex; align-items: flex-start; justify-content: center; gap: 12px; flex-wrap: wrap; min-height: 84px; }
+.chipwrap { display: inline-flex; flex-direction: column; align-items: center; }
+.chip { font-size: 2rem; font-weight: 700; padding: 2px 14px; border-radius: 10px; border: 2px solid var(--line); background: var(--bg); transition: all .5s; min-width: 2ch; text-align: center; }
+.chip.hot { border-color: var(--accent); color: var(--accent); transform: scale(1.06); }
+.chip.good { border-color: var(--good); color: var(--good); transform: scale(1.06); }
+.chip.dim { opacity: .35; }
+.chip.hidden, .tag.hidden { opacity: 0; }
+.tag { font-size: .8rem; opacity: .7; min-height: 1.4em; transition: opacity .5s; }
+.op { font-size: 2rem; font-weight: 700; opacity: .5; padding-top: 2px; }
+.numline { width: 100%; max-height: 170px; }
+.area { display: grid; gap: 4px; height: 190px; max-width: 480px; margin: 0 auto; width: 100%; }
+.ah { font-weight: 700; align-self: center; justify-self: center; padding: 0 6px; opacity: .7; }
+.cell { border: 2px dashed var(--line); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; font-weight: 700; transition: all .5s; }
+.cell.on { border-style: solid; background: var(--bg); }
+.cell.hot { border-color: var(--accent); color: var(--accent); }
+.bar { display: flex; gap: 3px; max-width: 520px; margin: 0 auto; width: 100%; }
+.seg { flex: 1; height: 44px; border: 2px solid var(--line); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: .9rem; opacity: .8; transition: all .5s; }
+.seg.hot { border-color: var(--accent); background: var(--accent); color: #fff; opacity: 1; }
+.seg.half { border-color: var(--accent); background: linear-gradient(90deg, var(--accent) 50%, transparent 50%); opacity: 1; }
+.caption { font-size: 1.2rem; font-weight: 600; text-align: center; min-height: 3.2em; margin: 12px 0 4px; }
+.controls { display: flex; gap: 8px; justify-content: center; }
+.controls button.ghost { background: transparent; color: var(--fg); border: 1px solid var(--line); }
+button:disabled { opacity: .4; cursor: default; }
+.steplist { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 4px; counter-reset: s; }
+.steplist li { counter-increment: s; }
+.steplist button { all: unset; cursor: pointer; display: block; width: 100%; padding: 6px 10px; border-radius: 8px; font-size: .95rem; opacity: .55; }
+.steplist button::before { content: counter(s) ". "; }
+.steplist li.past button { opacity: .8; }
+.steplist li.current button { opacity: 1; background: var(--bg); font-weight: 600; outline: 1px solid var(--accent); }
+.steplist button:focus-visible { outline: 2px solid var(--accent); }
 .question { font-size: 2rem; font-weight: 700; margin: 8px 0; }
 form { display: flex; gap: 8px; }
 input { font: inherit; font-size: 1.4rem; width: 8ch; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); }
