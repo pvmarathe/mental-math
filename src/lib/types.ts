@@ -7,6 +7,11 @@ export interface Problem {
   answer: number
 }
 
+/** The animation receives the current step (0-based) and draws that moment. */
+export interface AnimationProps {
+  step: number
+}
+
 export interface Lesson {
   /** URL-safe id, e.g. "add-near-100" */
   slug: string
@@ -16,9 +21,9 @@ export interface Lesson {
   difficulty: Difficulty
   /** ISO date (YYYY-MM-DD) the lesson goes live. Future dates stay hidden. */
   publishDate: string
-  /** The animated explanation */
-  Animation: ComponentType
-  /** Short plain-English steps shown under the animation */
+  /** The animated explanation. Must render sensibly for every step index. */
+  Animation: ComponentType<AnimationProps>
+  /** One plain-English caption per animation step. */
   steps: string[]
   /** Creates one fresh practice problem. Pass a random function for tests. */
   generate: (rand?: () => number) => Problem

@@ -17,7 +17,7 @@ npm run build
 1. Copy `src/lessons/add-near-100.tsx` to a new file, e.g. `src/lessons/week-02-<topic>.tsx`.
 2. Change the slug, title, summary, difficulty, steps, animation and `generate`.
 3. Set `publishDate` to the day it should go live (future dates stay hidden).
-4. `npm test`, open a pull request, merge. The Monday deploy job publishes it.
+4. `npm test`, open a pull request, merge. The lesson stays hidden until its `publishDate`, then appears on its own (the check happens in the visitor's browser, so no redeploy is needed).
 
 ## Stack
 
