@@ -1,0 +1,28 @@
+:root {
+  --bg: #fafaf7; --fg: #1d2430; --card: #fff; --line: #e3e3dc; --accent: #d9480f; --good: #2b8a3e; --bad: #c92a2a;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #14171c; --fg: #e8eaed; --card: #1e232b; --line: #2f3641; --accent: #ff8a4c; --good: #69db7c; --bad: #ff8787; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 18px/1.5 system-ui, sans-serif; }
+main { max-width: 720px; margin: 0 auto; padding: 24px 16px 64px; }
+a { color: var(--accent); }
+.lead { font-size: 1.1rem; opacity: .8; }
+.card { display: block; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin: 16px 0; text-decoration: none; color: inherit; }
+a.card { display: flex; flex-direction: column; gap: 4px; }
+a.card:hover { border-color: var(--accent); }
+.lesson-list { list-style: none; padding: 0; }
+.badge { align-self: flex-start; font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; padding: 2px 8px; border-radius: 99px; border: 1px solid var(--line); }
+.stage { display: flex; align-items: center; justify-content: center; gap: 14px; font-size: 2.4rem; font-weight: 700; min-height: 120px; position: relative; }
+.num { transition: color .6s; min-width: 3ch; text-align: center; }
+.op { opacity: .5; }
+.note { position: absolute; bottom: 0; font-size: 1rem; font-weight: 400; color: var(--accent); }
+.question { font-size: 2rem; font-weight: 700; margin: 8px 0; }
+form { display: flex; gap: 8px; }
+input { font: inherit; font-size: 1.4rem; width: 8ch; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); }
+button { font: inherit; padding: 8px 20px; border-radius: 8px; border: 0; background: var(--accent); color: #fff; cursor: pointer; }
+[role=status].right { color: var(--good); } [role=status].wrong { color: var(--bad); }
+.score { opacity: .7; font-size: .9rem; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
